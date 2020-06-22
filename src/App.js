@@ -1,8 +1,8 @@
 import React, {Component}  from 'react';
 import CardList from './CardList';
 import SearchBox from './SearchBox';
-import {robots} from './robots';
 import './App.css';
+import Scroll from './Scroll';
 
 //App as a component that owns the 2 states, can pass down the states / custom functions as prop to render (). 
 class App extends Component {
@@ -36,7 +36,9 @@ class App extends Component {
 				<div className = 'tc'>	
 					<h1 className = 'f1'>Robots Friends </h1>
 					<SearchBox searchChange = {this.onSearchChange} />
-					<CardList robots = {filteredRobots} />
+					<Scroll>
+						<CardList robots = {filteredRobots} />
+					</Scroll>	
 				</div>
 			)	
 		}
