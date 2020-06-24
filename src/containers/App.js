@@ -1,8 +1,8 @@
 import React, {Component}  from 'react';
-import CardList from './CardList';
-import SearchBox from './SearchBox';
+import CardList from '../components/CardList';
+import SearchBox from '../components/SearchBox';
+import Scroll from '../components/Scroll';
 import './App.css';
-import Scroll from './Scroll';
 
 //App as a component that owns the 2 states, can pass down the states / custom functions as prop to render (). 
 class App extends Component {
@@ -24,15 +24,15 @@ class App extends Component {
 	} //on search box change we update the state
 
 	render () {
+		const {robots, searchfield} = this.state;
 		//filter the robots based on search box change
-		const filteredRobots = this.state.robots.filter(robots => {
-			return robots.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+		const filteredRobots = robots.filter(robot => {
+			return robot.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
 
-		if (this.state.robots.length === 0) {
-			return <h1>Loading</h1>
-		}else {
-			return (
+		return !robots.length ?
+			<h1>Loading</h1> : 
+			(
 				<div className = 'tc'>	
 					<h1 className = 'f1'>Robots Friends </h1>
 					<SearchBox searchChange = {this.onSearchChange} />
@@ -40,8 +40,7 @@ class App extends Component {
 						<CardList robots = {filteredRobots} />
 					</Scroll>	
 				</div>
-			)	
-		}
+			)
 	}
 }
 
